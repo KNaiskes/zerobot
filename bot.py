@@ -5,7 +5,7 @@
 
 import tweepy
 import time
-from keys import *
+from keys import * # I keep my keys in an another file so they won't be exposed to the public
 
 #########################
 #Add your keys here
@@ -22,35 +22,46 @@ auth.set_access_token(access_token,access_token_secret)
 
 api = tweepy.API(auth)
 
+def addDelay():
+	time.sleep(15) #Add a delay of 15 seconds, so bot won't get banned
+
+def checkChars(chars):
+	if(len(chars) <= 140):
+		return True
+	while(len(chars) > 140):
+		print "Text must be less than 140 characters, try again"
+		chars = raw_input()
+
 def tweetIt(message):
-	api.update_status(message)
-	#Test if tweet is larger thant 140 characters
+	if(checkChars(message) == True):
+		api.update_status(message)
 
 def retweetIt(username):
 	for status in api.user_timeline("@"+username):
 		api.retweet(status.id)
-		time.sleep(10)
+		addDelay()
 		#Ask for how many tweets they want to retweet
 
-def replyById(tweet_id,username):
-	username = "@"+username
-	api.update_status(username+" does this work ?",tweet_id )
+def replyById(tweet_id,username,message):
+	if(checkChars(message) == True):
+		username = "@"+username
+		api.update_status(username+message,tweet_id)
 
 def replyToWordInMyTimeLine(word):
 	myTweets = api.home_timeline()
 	for tweet in myTweets:
 		if word in tweet.text:
 			api.update_status("thanks!")
+			addDelay()
 
 def sendDirectMessage(username,message):
-	if(len(message) <= 140 ):
+	if(checkChars(message) == True):
 		api.send_direct_message(screen_name=username,text=message)
-	else:
-		print "Your message is logner than 140 characters! Aborted"
 
 def listAllFollowes(username):
 	for user in tweepy.Cursor(api.followers,screen_name=username).items():
 		print user.screen_name
+		addDelay()
 #		print user.id
 
 def printUserTweets(username):
@@ -58,12 +69,6 @@ def printUserTweets(username):
 	print " "
 	for tweets in api.user_timeline(screen_name=username,count=20):
 		print tweets.text
+		addDelay()
 	print " "
 
-#tweetIt("testing my function!")
-#retweetIt("SophiaHatzi")
-#replyById("757467375994302464","SophiaHatzi")
-#replyToWordInMyTimeLine("happy")
-#sendDirectMessage("SophiaHatzi","this is a message")
-#listAllFollowes("SophiaHatzi")
-#printUserTweets("SophiaHatzi")
