@@ -26,11 +26,10 @@ def addDelay():
 	time.sleep(15) #Add a delay of 15 seconds, so bot won't get banned
 
 def checkChars(chars):
-	if(len(chars) <= 140):
-		return True
-	while(len(chars) > 140):
-		print "Text must be less than 140 characters, try again"
-		chars = raw_input()
+	if(len(chars) > 140):
+		print "Your text must be equal to 140 or less characters. Aborted"
+		return False
+	return True
 
 def tweetIt(message):
 	if(checkChars(message) == True):
@@ -47,12 +46,13 @@ def replyById(tweet_id,username,message):
 		username = "@"+username
 		api.update_status(username+message,tweet_id)
 
-def replyToWordInMyTimeLine(word):
+def replyToWordInMyTimeLine(word,answer):
 	myTweets = api.home_timeline()
-	for tweet in myTweets:
-		if word in tweet.text:
-			api.update_status("thanks!")
-			addDelay()
+	if(checkChars(answer) == True):
+		for tweet in myTweets:
+			if word in tweet.text:
+				api.update_status(answer)
+				addDelay()
 
 def sendDirectMessage(username,message):
 	if(checkChars(message) == True):
@@ -71,4 +71,7 @@ def printUserTweets(username):
 		print tweets.text
 		addDelay()
 	print " "
+
+print " "
+print "Done"
 
