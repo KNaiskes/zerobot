@@ -5,6 +5,7 @@
 
 import tweepy
 import time
+import argparse
 from keys import * # I keep my keys in an another file so they won't be exposed to the public
 
 #########################
@@ -84,7 +85,7 @@ def listAllFollowes():
 		addDelay()
 #		print user.id
 
-def printUserTweets(username):
+def printUserTweets():
 	print("Whose user do you want to list their tweets ? :")
 	username = raw_input()
 	print "Here are the 20 latest tweets (if there are any or 20)"
@@ -93,6 +94,31 @@ def printUserTweets(username):
 		print tweets.text
 		addDelay()
 	print " "
+
+def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-pt","--posttweet",help="post a tweet",actions="store_true")
+	parser.add_argument("-rt","--retweet",help="retweet posts by user",actions="store_true")
+	parser.add_argument("-rbw","--replybyword",help="reply based to a specifi word",actions="store_true")
+	parser.add_argument("-dm","--directmessage",help="send a direct message",actions="store_true")
+	parser.add_argument("-lf","--listfollowers",help="list followers",actions="store_true")
+	parser.add_argument("-gt","--gettweets",help="get user tweets",actions="store_true")
+	args = parser.parse_args()
+
+	if args.posttweet:
+		tweetIt()
+	elif args.retweet:
+		retweetIt()
+	elif args.replybyword:
+		replyToWordInMyTimeLine()
+	elif args.directmessage:
+		sendDirectMessage()
+	elif args.listfollowers:
+		listAllFollowes()
+	elif args.gettweets:
+		printUserTweets()
+
+main()
 
 print " "
 print "Done"
