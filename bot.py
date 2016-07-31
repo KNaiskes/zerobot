@@ -31,22 +31,36 @@ def checkChars(chars):
 		return False
 	return True
 
-def tweetIt(message):
+def tweetIt():
+	print ("Enter your tweet: ")
+	message = raw_input()
 	if(checkChars(message) == True):
 		api.update_status(message)
 
-def retweetIt(username):
+def retweetIt():
+	print ("Enter username :")
+	username = raw_input()
 	for status in api.user_timeline("@"+username):
 		api.retweet(status.id)
 		addDelay()
 		#Ask for how many tweets they want to retweet
 
-def replyById(tweet_id,username,message):
+def replyById():
+	print("Enter tweet's id :")
+	tweet_id = raw_input()
+	print("Enter username :")
+	username = raw_input()
+	print("Enter your message :")
+	message = raw_input()
 	if(checkChars(message) == True):
 		username = "@"+username
 		api.update_status(username+message,tweet_id)
 
-def replyToWordInMyTimeLine(word,answer):
+def replyToWordInMyTimeLine():
+	print("Enter the word you are looking for :")
+	word = raw_input()
+	print("Enter your answer : ")
+	answer = raw_input()
 	myTweets = api.home_timeline()
 	if(checkChars(answer) == True):
 		for tweet in myTweets:
@@ -54,17 +68,25 @@ def replyToWordInMyTimeLine(word,answer):
 				api.update_status(answer)
 				addDelay()
 
-def sendDirectMessage(username,message):
+def sendDirectMessage():
+	print("Enter user's name who you want to send a direct message :")
+	username = raw_input()
+	print("Enter the message : ")
+	message = raw_input()
 	if(checkChars(message) == True):
 		api.send_direct_message(screen_name=username,text=message)
 
-def listAllFollowes(username):
+def listAllFollowes():
+	print("Which user's followers do you want to list ? :")
+	username = raw_input()
 	for user in tweepy.Cursor(api.followers,screen_name=username).items():
 		print user.screen_name
 		addDelay()
 #		print user.id
 
 def printUserTweets(username):
+	print("Whose user do you want to list their tweets ? :")
+	username = raw_input()
 	print "Here are the 20 latest tweets (if there are any or 20)"
 	print " "
 	for tweets in api.user_timeline(screen_name=username,count=20):
