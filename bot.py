@@ -97,12 +97,12 @@ def printUserTweets():
 
 def main():
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-pt","--posttweet",help="post a tweet",actions="store_true")
-	parser.add_argument("-rt","--retweet",help="retweet posts by user",actions="store_true")
-	parser.add_argument("-rbw","--replybyword",help="reply based to a specifi word",actions="store_true")
-	parser.add_argument("-dm","--directmessage",help="send a direct message",actions="store_true")
-	parser.add_argument("-lf","--listfollowers",help="list followers",actions="store_true")
-	parser.add_argument("-gt","--gettweets",help="get user tweets",actions="store_true")
+	parser.add_argument("-pt","--posttweet",help="post a tweet",action="store_true")
+	parser.add_argument("-rt","--retweet",help="retweet posts by user",action="store_true")
+	parser.add_argument("-rbw","--replybyword",help="reply based to a specifi word",action="store_true")
+	parser.add_argument("-dm","--directmessage",help="send a direct message",action="store_true")
+	parser.add_argument("-lf","--listfollowers",help="list followers",action="store_true")
+	parser.add_argument("-gt","--gettweets",help="get user tweets",action="store_true")
 	args = parser.parse_args()
 
 	if args.posttweet:
