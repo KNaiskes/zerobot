@@ -95,6 +95,22 @@ def printUserTweets():
 		addDelay()
 	print " "
 
+def menu():
+	print "
+	#############################################################################
+	# 			Options                                             #
+        #                                                                           #
+	#		1) -pt post a tweet			                    #
+	#		2) -rt retweet 				                    #
+	#	        3) -rbw reply based to a specifi word	                    #
+	#		4) -dm send a direct message	                            #
+	#		5) -lf list all followers of a user	                    #
+	#               6) -gt print the latest 20 tweets of a user                 #
+	#                                                                           #
+	#############################################################################
+	"
+
+
 def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-pt","--posttweet",help="post a tweet",action="store_true")
@@ -104,6 +120,8 @@ def main():
 	parser.add_argument("-lf","--listfollowers",help="list followers",action="store_true")
 	parser.add_argument("-gt","--gettweets",help="get user tweets",action="store_true")
 	args = parser.parse_args()
+
+	menu()
 
 	if args.posttweet:
 		tweetIt()
