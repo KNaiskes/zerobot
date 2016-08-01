@@ -121,8 +121,6 @@ def main():
 	parser.add_argument("-gt","--gettweets",help="get user tweets",action="store_true")
 	args = parser.parse_args()
 
-	menu()
-
 	if args.posttweet:
 		tweetIt()
 	elif args.retweet:
@@ -135,6 +133,8 @@ def main():
 		listAllFollowes()
 	elif args.gettweets:
 		printUserTweets()
+	else:
+		menu()
 
 main()
 
