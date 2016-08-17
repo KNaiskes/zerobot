@@ -1,6 +1,24 @@
 # zerobot
 A twitter bot written in Python
 
+
+
+## Requirements
+ `python2.7`
+`tweepy`
+
+## Before running the script
+Before running the script edit the bot.py and add your twitter tokens.
+For more information look [here](https://dev.twitter.com/oauth/overview)
+
+## How to run the script
+After downloading or cloning the project cd to the directory and run the bot.py like so : 
+`python bot.py`
+installation is not needed!
+
+
+
+
 -------------------------------
 Functinality
 -------------------------------
